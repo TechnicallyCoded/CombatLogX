@@ -7,12 +7,14 @@ import java.io.File;
 import java.util.List;
 
 public class ConfigLang extends Config {
-    private static final File FILE = new File(FOLDER, "language.yml");
     private static YamlConfiguration config = new YamlConfiguration();
 
     public static YamlConfiguration load() {
-        if (!FILE.exists()) copyFromJar("language.yml", FOLDER);
-        config = load(FILE);
+        File folder = getDataFolder();
+        File file = new File(folder, "language.yml");
+        if (!file.exists()) copyFromJar("language.yml", folder);
+
+        config = load(file);
         return config;
     }
 

@@ -8,8 +8,15 @@ import java.io.File;
 import java.util.List;
 
 public class ConfigOptions extends Config {
-    private static final File FILE = new File(FOLDER, "config.yml");
-    
+    public static YamlConfiguration load() {
+        File folder = getDataFolder();
+        File file = new File(folder, "config.yml");
+        if (!file.exists()) copyFromJar("config.yml", folder);
+
+        config = load(file);
+        return config;
+    }
+
     public static boolean OPTION_DEBUG;
     public static boolean OPTION_CHECK_FOR_UPDATES;
     public static List<String> OPTION_DISABLED_WORLDS;
@@ -35,12 +42,6 @@ public class ConfigOptions extends Config {
     public static String COMBAT_BYPASS_PERMISSION;
     private static YamlConfiguration config = new YamlConfiguration();
 
-    public static YamlConfiguration load() {
-        if (!FILE.exists()) copyFromJar("config.yml", FOLDER);
-        config = load(FILE);
-        defaults();
-        return config;
-    }
 
     private static void defaults() {
         OPTION_DEBUG = get(config, "options.debug", false);

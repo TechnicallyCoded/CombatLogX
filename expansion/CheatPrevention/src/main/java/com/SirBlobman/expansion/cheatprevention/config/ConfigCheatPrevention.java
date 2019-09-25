@@ -15,16 +15,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.YamlConfiguration;
 
 public class ConfigCheatPrevention extends Config {
-	private static File FOLDER = CheatPrevention.FOLDER;
-	private static File FILE = new File(FOLDER, "cheat prevention.yml");
 	private static YamlConfiguration config = new YamlConfiguration();
 
 	public static void load() {
-		if (FOLDER == null) FOLDER = CheatPrevention.FOLDER;
-		if (FILE == null) FILE = new File(FOLDER, "cheat prevention.yml");
+		File folder = CheatPrevention.FOLDER;
+		File file = new File(folder, "cheat prevention.yml");
+		if(!file.exists()) copyFromJar("cheat prevention.yml", folder);
 
-		if (!FILE.exists()) copyFromJar("cheat prevention.yml", FOLDER);
-		config = load(FILE);
+		config = load(file);
 		defaults();
 	}
 
