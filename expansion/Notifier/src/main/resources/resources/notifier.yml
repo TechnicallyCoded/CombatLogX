@@ -54,7 +54,7 @@ score board:
   - "&f&lEnemy Health:"
   - "  &7{enemy_health} health"
   - "  &7{enemy_health_rounded} rounded"
-  - "  &7{enemy_health_hearts}"
+  - "  &7{enemy_hearts}"
   - "&f&lCombat Status:"
   - "  &7{in_combat}"
   - "  &7{status}"
