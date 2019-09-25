@@ -8,13 +8,14 @@ import java.io.File;
 import java.util.List;
 
 public class ConfigOptions extends Config {
-    public static YamlConfiguration load() {
+    private static YamlConfiguration config = new YamlConfiguration();
+    public static void load() {
         File folder = getDataFolder();
         File file = new File(folder, "config.yml");
         if (!file.exists()) copyFromJar("config.yml", folder);
 
         config = load(file);
-        return config;
+        defaults();
     }
 
     public static boolean OPTION_DEBUG;
@@ -40,7 +41,6 @@ public class ConfigOptions extends Config {
     public static boolean COMBAT_UNTAG_ON_SELF_DEATH;
     public static boolean COMBAT_BYPASS_ALLOW;
     public static String COMBAT_BYPASS_PERMISSION;
-    private static YamlConfiguration config = new YamlConfiguration();
 
 
     private static void defaults() {

@@ -29,7 +29,9 @@ public class CombatListener implements Listener {
 
 		World world = player.getWorld();
 		String worldName = world.getName();
-		if(ConfigOptions.OPTION_DISABLED_WORLDS.contains(worldName)) {
+
+		List<String> disabledWorldList = ConfigOptions.OPTION_DISABLED_WORLDS;
+		if(disabledWorldList.contains(worldName)) {
 			e.setCancelled(true);
 			return;
 		}
