@@ -12,17 +12,20 @@ import com.SirBlobman.expansion.citizens.trait.TraitCombatLogX;
 
 public class CompatCitizens implements CLXExpansion {
     public static File FOLDER;
-    
+
+    @Override
     public String getUnlocalizedName() {
         return "CompatCitizens";
     }
-    
+
+    @Override
     public String getName() {
         return "Citizens Compatibility";
     }
-    
+
+    @Override
     public String getVersion() {
-        return "14.25";
+        return "14.26";
     }
     
     @Override
@@ -32,9 +35,10 @@ public class CompatCitizens implements CLXExpansion {
             Expansions.unloadExpansion(this);
             return;
         }
-        
+
         FOLDER = getDataFolder();
         ConfigCitizens.load();
+
         TraitCombatLogX.onEnable();
         PluginUtil.regEvents(new ListenCombat(), new ListenCreateNPCs(this), new ListenPlayerJoin(), new ListenHandleNPCs());
         

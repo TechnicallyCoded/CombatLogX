@@ -11,17 +11,17 @@ import java.io.File;
 import java.util.UUID;
 
 public class ConfigData extends Config {
-    private static final File FOLDER = CompatCitizens.FOLDER;
-    private static final File FUSERS = new File(FOLDER, "users");
-
     private static void save(OfflinePlayer op, YamlConfiguration config) {
         try {
             UUID uuid = op.getUniqueId();
             String id = uuid.toString();
             String fileName = id + ".yml";
-            if (!FUSERS.exists()) FUSERS.mkdirs();
 
-            File file = new File(FUSERS, fileName);
+            File folder = CompatCitizens.FOLDER;
+            File usersFolder = new File(folder, "users");
+            if(!usersFolder.exists()) usersFolder.mkdirs();
+
+            File file = new File(usersFolder, fileName);
             if (!file.exists()) file.createNewFile();
 
             save(config, file);
@@ -38,7 +38,11 @@ public class ConfigData extends Config {
         UUID uuid = op.getUniqueId();
         String id = uuid.toString();
         String fileName = id + ".yml";
-        File file = new File(FUSERS, fileName);
+
+        File folder = CompatCitizens.FOLDER;
+        File usersFolder = new File(folder, "users");
+        if(!usersFolder.exists()) usersFolder.mkdirs();
+        File file = new File(usersFolder, fileName);
 
         if (!file.exists()) save(op, config);
 
