@@ -2,6 +2,7 @@ package com.SirBlobman.expansion.citizens.listener;
 
 import java.util.List;
 
+import com.SirBlobman.api.nms.NMS_Handler;
 import com.SirBlobman.api.utility.ItemUtil;
 import com.SirBlobman.combatlogx.utility.SchedulerUtil;
 import com.SirBlobman.combatlogx.utility.Util;
@@ -107,16 +108,17 @@ public class ListenHandleNPCs implements Listener {
         for(int i = 0; i < contentsListSize; i++) {
             ItemStack drop = contentsList.get(i);
             if(!ItemUtil.isAir(drop)) world.dropItemNaturally(location, drop);
-            contentsList.set(i, null);
         }
 
-        final int armorListSize = armorList.size();
-        for(int i = 0; i < armorListSize; i++) {
-            ItemStack drop = armorList.get(i);
-            if(!ItemUtil.isAir(drop)) world.dropItemNaturally(location, drop);
-            armorList.set(i, null);
+        if(NMS_Handler.getMinorVersion() <= 8) {
+            final int armorListSize = armorList.size();
+            for(int i = 0; i < armorListSize; i++) {
+                ItemStack drop = armorList.get(i);
+                if(!ItemUtil.isAir(drop)) world.dropItemNaturally(location, drop);
+            }
         }
 
-        ConfigData.force(owner, "inventory data.items", contentsList);
+        ConfigData.force(owner, "inventory data.items", null);
+        ConfigData.force(owner, "inventory data.armor", null);
     }
 }
