@@ -14,20 +14,44 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 
 public class ListenCommandBlocker implements Listener {
-    @EventHandler(priority=EventPriority.NORMAL, ignoreCancelled=true)
+    private void debug(String message) {
+        String msg = "[Cheat Prevention] [Command Blocker] " + message;
+        Util.debug(msg);
+    }
+
+    @EventHandler(priority=EventPriority.LOWEST, ignoreCancelled=true)
     public void onCommand(PlayerCommandPreprocessEvent e) {
         Player player = e.getPlayer();
-        if(!CombatUtil.isInCombat(player)) return;
+        debug("Detected PlayerCommandPreProcessEvent for player '" + player.getName() + "'.");
+
+        if(!CombatUtil.isInCombat(player)) {
+            debug("Player is not in combat, ignoring event.");
+            return;
+        }
         
         String command = e.getMessage();
+        debug("Event Command: " + command);
+
         String actualCommand = convertCommand(command);
-        if(!isBlocked(actualCommand)) return;
+        debug("Converted Command: " + actualCommand);
+
+        if(!isBlocked(actualCommand)) {
+            debug("The command is not blocked by config, ignoring event.");
+            return;
+        }
         
         e.setCancelled(true);
-        
+
         String format = ConfigLang.getWithPrefix("messages.expansions.cheat prevention.command.not allowed");
         String message = format.replace("{command}", actualCommand);
+
         Util.sendMessage(player, message);
+        debug("Cancelled command event and sent message to player.");
+    }
+
+    @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
+    public void onCommandHighest(PlayerCommandPreprocessEvent e) {
+        onCommand(e);
     }
     
     private String convertCommand(String original) {
@@ -66,9 +90,5 @@ public class ListenCommandBlocker implements Listener {
             if(lowerString.startsWith(lowerValue)) return true;
         }
         return false;
-    }
-    
-    private void debug(String message) {
-    	Util.debug("[Cheat Prevention] [Command Blocker] " + message);
     }
 }

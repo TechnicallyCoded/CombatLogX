@@ -3,12 +3,13 @@ package com.SirBlobman.expansion.notifier.listener;
 import com.SirBlobman.combatlogx.CombatLogX;
 import com.SirBlobman.combatlogx.event.PlayerCombatTimerChangeEvent;
 import com.SirBlobman.combatlogx.event.PlayerUntagEvent;
+import com.SirBlobman.expansion.notifier.Notifier;
 import com.SirBlobman.expansion.notifier.config.ConfigNotifier;
 import com.SirBlobman.expansion.notifier.hook.MVDWUtil;
 import com.SirBlobman.expansion.notifier.hook.TitleManagerUtil;
 import com.SirBlobman.expansion.notifier.utility.ActionBarUtil;
 import com.SirBlobman.expansion.notifier.utility.BossBarUtil;
-import com.SirBlobman.expansion.notifier.utility.ScoreboardUtil;
+import com.SirBlobman.expansion.notifier.utility.scoreboard.ScoreboardHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -18,6 +19,11 @@ import org.bukkit.event.Listener;
 import org.bukkit.plugin.PluginManager;
 
 public class ListenNotifier implements Listener {
+	private final Notifier expansion;
+	public ListenNotifier(Notifier expansion) {
+		this.expansion = expansion;
+	}
+
 	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
 	public void onTimerChange(PlayerCombatTimerChangeEvent e) {
 		Player player = e.getPlayer();
@@ -37,8 +43,8 @@ public class ListenNotifier implements Listener {
 				PluginManager manager = Bukkit.getPluginManager();
 				if(manager.isPluginEnabled("TitleManager")) TitleManagerUtil.disableScoreboard(player);
 			}
-			
-			ScoreboardUtil.updateScoreBoard(player);
+
+			if(!ScoreboardHandler.isDisabled(player)) ScoreboardHandler.updateScoreboard(this.expansion, player);
 		}
 
 		if(ConfigNotifier.ANIMATED_NAMES_USE) {
@@ -58,7 +64,7 @@ public class ListenNotifier implements Listener {
 				return;
 			}
 
-			ScoreboardUtil.removeScoreBoard(player);
+			if(!ScoreboardHandler.isDisabled(player)) ScoreboardHandler.disableScoreboard(this.expansion, player);
 			if(ConfigNotifier.SCORE_BOARD_TITLE_MANAGER_RESTORE) {
 				PluginManager manager = Bukkit.getPluginManager();
 				if(manager.isPluginEnabled("TitleManager")) {

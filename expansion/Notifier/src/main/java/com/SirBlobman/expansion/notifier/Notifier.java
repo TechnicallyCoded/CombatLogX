@@ -8,7 +8,7 @@ import com.SirBlobman.expansion.notifier.config.ConfigNotifier;
 import com.SirBlobman.expansion.notifier.listener.ListenNotifier;
 import com.SirBlobman.expansion.notifier.utility.ActionBarUtil;
 import com.SirBlobman.expansion.notifier.utility.BossBarUtil;
-import com.SirBlobman.expansion.notifier.utility.ScoreboardUtil;
+import com.SirBlobman.expansion.notifier.utility.scoreboard.ScoreboardHandler;
 
 import org.bukkit.Bukkit;
 
@@ -20,14 +20,14 @@ public class Notifier implements CLXExpansion {
     }
     
     public String getVersion() {
-        return "14.10";
+        return "14.15";
     }
     
     @Override
     public void enable() {
         FOLDER = getDataFolder();
         ConfigNotifier.load();
-        PluginUtil.regEvents(new ListenNotifier());
+        PluginUtil.regEvents(new ListenNotifier(this));
     }
     
     @Override
@@ -35,7 +35,7 @@ public class Notifier implements CLXExpansion {
         Bukkit.getOnlinePlayers().forEach(player -> {
             BossBarUtil.removeBossBar(player, true);
             ActionBarUtil.removeActionBar(player, true);
-            ScoreboardUtil.removeScoreBoard(player);
+            if(!ScoreboardHandler.isDisabled(player)) ScoreboardHandler.disableScoreboard(this, player);
         });
     }
     

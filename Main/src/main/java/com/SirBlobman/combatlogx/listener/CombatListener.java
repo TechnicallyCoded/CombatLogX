@@ -10,12 +10,14 @@ import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.World;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntityExplodeEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 
 import java.util.List;
@@ -106,8 +108,13 @@ public class CombatListener implements Listener {
 	
 	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
 	public void onDeath(EntityDeathEvent e) {
-		checkEnemyDeathUntag(e);
-		checkSelfDeathUntag(e);
+		checkEnemyDeathUntag(e.getEntity());
+		checkSelfDeathUntag(e.getEntity());
+	}
+
+	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
+	public void onExplode(EntityExplodeEvent e) {
+		checkEnemyDeathUntag(e.getEntity());
 	}
 	
 	@EventHandler(priority=EventPriority.MONITOR, ignoreCancelled=true)
@@ -115,12 +122,13 @@ public class CombatListener implements Listener {
 		checkSelfDeathUntag(e);
 	}
 	
-	private void checkEnemyDeathUntag(EntityDeathEvent e) {
+	private void checkEnemyDeathUntag(Entity enemy) {
 		if(!ConfigOptions.COMBAT_UNTAG_ON_ENEMY_DEATH) return;
+
+		if(!(enemy instanceof LivingEntity)) return;
+		LivingEntity livingEnemy = (LivingEntity) enemy;
 		
-		LivingEntity enemy = e.getEntity();
-		
-		OfflinePlayer offline = CombatUtil.getByEnemy(enemy);
+		OfflinePlayer offline = CombatUtil.getByEnemy(livingEnemy);
 		if(offline == null) return;
 
 		Player player = offline.getPlayer();
@@ -130,10 +138,8 @@ public class CombatListener implements Listener {
 		CombatUtil.untag(player, UntagReason.EXPIRE_ENEMY_DEATH);
 	}
 	
-	private void checkSelfDeathUntag(EntityDeathEvent e) {
+	private void checkSelfDeathUntag(Entity entity) {
 		if(!ConfigOptions.COMBAT_UNTAG_ON_SELF_DEATH) return;
-		
-		LivingEntity entity = e.getEntity();
 		if(!(entity instanceof Player)) return;
 		
 		Player player = (Player) entity;
