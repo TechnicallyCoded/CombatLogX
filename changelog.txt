@@ -1,0 +1,5 @@
+9.9.1.9
+
+- Fixed Creeper Explosions not counting as enemy deaths
+- Fixed commands not being blocked from certain plugins
+- Added AntiFlicker Scoreboard v1.0.0 to Notifier
