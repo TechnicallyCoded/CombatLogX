@@ -17,6 +17,30 @@ They can be used to add new features to CombatLogX or add Compatibility with oth
   
 More information about expansions can be found here: [CombatLogX Wiki](https://www.spigotmc.org/wiki/combatlogx/)
 
+## CombatLogX API
+The API for this version is not on the global repository. You have to manually install it.  
+You can run the following commands as long as you have `Git` and `Maven` installed correctly.  
+```cmd
+git clone "https://github.com/SirBlobman/SirBlobmanAPI.git" "./SirBlobmanAPI"
+git clone "https://github.com/SirBlobman/CombatLogX.git" "./CombatLogX-9" --branch "old/9.0.0.0"
+cd "SirBlobmanAPI"
+mvn clean install
+cd "../CombatLogX-9"
+mvn clean install -N
+cd "API"
+mvn clean install
+```  
+After you do that, you will be able to use the project in your maven pom.xml
+
+```pom.xml
+<dependencies>
+    <groupId>com.SirBlobman.combatlogx</groupId>
+    <artifactId>CombatLogX-API</artifactId>
+    <version>9.0.0.0</version>
+    <scope>provided</scope>
+</dependencies>
+```
+
 ---
 If you have any suggestions you can contact SirBlobman here:  
 **Discord:** https://discord.gg/ZtbqXUK  
