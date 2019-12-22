@@ -14,6 +14,14 @@
 	<artifactId>exp-CompatTowny</artifactId>
 	<name>Towny Compatibility</name>
 	<description>Expansion for CombatLogX that adds many features related to Towny</description>
+    
+    <repositories>
+        <!-- GitHub Towny Repository -->
+        <repository>
+            <id>github-towny</id>
+            <url>https://maven.pkg.github.com/TownyAdvanced/Towny</url>
+        </repository>
+    </repositories>
 
 	<dependencies>
 		<!-- CombatLogX API -->
@@ -40,12 +48,12 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- Towny (Requires Local Install) -->
-		<!-- URL: http://towny.palmergames.com/category/towny-download/towny-release-download/ -->
+		<!-- Towny -->
+        <!-- Requires proper setup: https://github.com/TownyAdvanced/Towny/wiki/TownyAPI#getting-started-with-towny-and-your-ide -->
 		<dependency>
-			<groupId>com.palmergames.bukkit</groupId>
+			<groupId>com.palmergames.bukkit.towny</groupId>
 			<artifactId>Towny</artifactId>
-			<version>0.94.0.0</version>
+			<version>0.95.2.0</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

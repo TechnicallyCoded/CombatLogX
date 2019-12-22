@@ -50,8 +50,9 @@
 		</dependency>
 
 		<!-- CMI API -->
+        <!-- Requires local install -->
 		<dependency>
-			<groupId>com.Zrips.CMI</groupId>
+			<groupId>com.zrips</groupId>
 			<artifactId>CMI-API</artifactId>
 			<version>7.6.2.0</version>
 			<scope>provided</scope>

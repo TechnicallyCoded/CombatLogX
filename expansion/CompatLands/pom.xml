@@ -16,7 +16,11 @@
     <description>Expansion for CombatLogX that adds many features related to Lands</description>
 
     <repositories>
-
+        <!-- Jitpack -->
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io/</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -44,12 +48,11 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- Lands (Requires Local Install) -->
-        <!-- Spigot URL: 'https://www.spigotmc.org/resources/53313/' -->
+        <!-- Lands API -->
         <dependency>
-            <groupId>me.angeschossen</groupId>
-            <artifactId>Lands</artifactId>
-            <version>3.9.3.0</version>
+            <groupId>com.github.Angeschossen</groupId>
+            <artifactId>LandsAPI</artifactId>
+            <version>4.3.3.0</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

@@ -40,12 +40,12 @@
 			<scope>provided</scope>
 		</dependency>
 		
-		<!-- Residence (Requires Local Install) -->
-		<!-- Spigot URL: https://www.spigotmc.org/resources/11480/ -->
+		<!-- Residence -->
+        <!-- Requires local installation -->
 		<dependency>
 			<groupId>com.bekvon.bukkit</groupId>
 			<artifactId>Residence</artifactId>
-			<version>4.8.6.6</version>
+			<version>4.8.8.2</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>

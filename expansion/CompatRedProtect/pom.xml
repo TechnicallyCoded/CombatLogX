@@ -47,11 +47,19 @@
 			<scope>provided</scope>
 		</dependency>
         
-        <!-- RedProtect -->
+        <!-- RedProtect Core -->
 		<dependency>
-			<groupId>br.net.fabiozumbi12</groupId>
-			<artifactId>RedProtect</artifactId>
-			<version>7.6.3</version>
+			<groupId>br.net.fabiozumbi12.RedProtect</groupId>
+			<artifactId>RedProtect-Core</artifactId>
+			<version>7.6.2</version>
+            <scope>provided</scope>
+		</dependency>
+        
+        <!-- RedProtect Spigot -->
+		<dependency>
+			<groupId>br.net.fabiozumbi12.RedProtect</groupId>
+			<artifactId>RedProtect-Spigot</artifactId>
+			<version>7.3.0</version>
             <scope>provided</scope>
 		</dependency>
 	</dependencies>

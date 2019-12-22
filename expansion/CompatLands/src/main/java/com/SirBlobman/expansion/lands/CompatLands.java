@@ -20,7 +20,7 @@ public class CompatLands extends NoEntryExpansion {
 	}
 
 	public String getVersion() {
-		return "14.6";
+		return "14.7";
 	}
 
 	@Override
