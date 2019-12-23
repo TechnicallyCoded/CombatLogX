@@ -30,13 +30,7 @@ public class CompatLands extends NoEntryExpansion {
 			return false;
 		}
 
-		try {
-			Class.forName("me.angeschossen.lands.api.landsaddons.LandsAddon");
-			return true;
-		} catch(ReflectiveOperationException ex) {
-			print("Your Lands version is not supported by CombatLogX.");
-			return false;
-		}
+		return true;
 	}
 
 	@Override
