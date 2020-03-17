@@ -26,3 +26,18 @@ rewards:
     - "msg {player} You killed {killed}!"
     - "eco give {player} 100"
     
+  reward2:
+    worlds:
+      - "*"
+    
+    mob types:
+      - PLAYER
+      - ZOMBIE
+      - SKELETON
+      - SPIDER
+      
+    commands:
+      - "command1"
+      - "command2"
+      - "etc..."
+    

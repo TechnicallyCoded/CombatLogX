@@ -1,9 +1,11 @@
 package com.SirBlobman.expansion.cheatprevention.config;
 
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import com.SirBlobman.combatlogx.config.Config;
 import com.SirBlobman.combatlogx.utility.PluginUtil;
@@ -39,8 +41,8 @@ public class ConfigCheatPrevention extends Config {
 	public static boolean GAMEMODE_CHANGE_WHEN_TAGGED;
 	public static String GAMEMODE_GAMEMODE;
 
-	public static boolean BLOCKED_COMMANDS_IS_WHITELIST;
 	public static List<String> BLOCKED_COMMANDS_LIST;
+	public static List<String> ALLOWED_COMMANDS_LIST;
 
 	public static boolean INVENTORY_CLOSE_ON_COMBAT;
 	public static boolean INVENTORY_PREVENT_OPENING;
@@ -90,8 +92,8 @@ public class ConfigCheatPrevention extends Config {
 
 		ENTITY_PREVENT_INTERACTION = get(config, "entities.prevent interaction", true);
 
-		BLOCKED_COMMANDS_IS_WHITELIST = get(config, "commands.whitelist", false);
-		BLOCKED_COMMANDS_LIST = get(config, "commands.commands", Util.newList("/tp", "/fly", "/gamemode"));
+		ALLOWED_COMMANDS_LIST = get(config, "commands.allowed-commands", new ArrayList<>());
+		BLOCKED_COMMANDS_LIST = get(config, "commands.blocked-commands", new ArrayList<>());
 
 		fixCommands();
 		detectAllAliases();
@@ -101,43 +103,85 @@ public class ConfigCheatPrevention extends Config {
 	}
 
 	private static void fixCommands() {
-		List<String> commandList = Util.newList(BLOCKED_COMMANDS_LIST);
-		List<String> newCommandList = Util.newList();
-		for(String command : commandList) {
-			if(!command.startsWith("/")) command = "/" + command;
-			newCommandList.add(command);
+		List<String> allowedCommandList = new ArrayList<>();
+		List<String> blockedCommandList = new ArrayList<>();
+		
+		for (String command : BLOCKED_COMMANDS_LIST) {
+			if(command.equals("*")) {
+				blockedCommandList.add("*");
+				continue;
+			}
+			
+			if (command.startsWith("/")) {
+				blockedCommandList.add(command);
+				continue;
+			}
+			
+			String newCommand = ("/" + command);
+			blockedCommandList.add(newCommand);
 		}
-
-		BLOCKED_COMMANDS_LIST = newCommandList;
+		BLOCKED_COMMANDS_LIST = blockedCommandList;
+		
+		for(String command : ALLOWED_COMMANDS_LIST) {
+			if(command.equals("*")) {
+				allowedCommandList.add("*");
+				continue;
+			}
+			
+			if(command.startsWith("/")) {
+				allowedCommandList.add(command);
+				continue;
+			}
+			
+			String newCommand = ("/" + command);
+			allowedCommandList.add(newCommand);
+		}
+		ALLOWED_COMMANDS_LIST = allowedCommandList;
 	}
 
 	private static final List<String> ALL_COMMANDS = Util.newList();
 	private static final List<String> ALL_ALIASES = Util.newList();
 	private static final Map<String, String> ALIAS_TO_COMMAND = Util.newMap();
 	private static void detectAllAliases() {
-		Map<String, String[]> allAliases = Bukkit.getCommandAliases();
-		for(Entry<String, String[]> entry : allAliases.entrySet()) {
-			String command = entry.getKey();
+		Map<String, String[]> aliasMap = Bukkit.getCommandAliases();
+		Set<Entry<String, String[]>> entrySet = aliasMap.entrySet();
+		
+		for(Entry<String, String[]> entry : entrySet) {
+			String commandName = entry.getKey();
+			ALL_COMMANDS.add(commandName);
+			
 			String[] aliases = entry.getValue();
-			ALL_COMMANDS.add(command);
 			for(String alias : aliases) {
 				ALL_ALIASES.add(alias);
-				ALIAS_TO_COMMAND.put(alias, command);
+				ALIAS_TO_COMMAND.put(alias, commandName);
 			}
 		}
 	}
 
 	private static void fixAliases() {
-		List<String> commandList = Util.newList(BLOCKED_COMMANDS_LIST);
-		List<String> newCommandList = Util.newList();
-
-		for(String command : commandList) {
-			String withoutBeginning = command.contains(" ") ? command.substring(command.indexOf(" ")) : "";
-			List<String> aliases = getAliases(command);
-			for(String alias : aliases) newCommandList.add("/" + alias + withoutBeginning);
+		List<String> blockedCommandList = new ArrayList<>();
+		for(String command : BLOCKED_COMMANDS_LIST) {
+			String withoutBeginning = (command.contains(" ") ? command.substring(command.indexOf(' ')) : "");
+			List<String> aliasList = getAliases(command);
+			
+			for(String alias : aliasList) {
+				String newCommand = ("/" + alias + withoutBeginning);
+				blockedCommandList.add(newCommand);
+			}
 		}
-
-		BLOCKED_COMMANDS_LIST.addAll(newCommandList);
+		BLOCKED_COMMANDS_LIST.addAll(blockedCommandList);
+		
+		List<String> allowedCommandList = new ArrayList<>();
+		for(String command : ALLOWED_COMMANDS_LIST) {
+			String withoutBeginning = (command.contains(" ") ? command.substring(command.indexOf(' ')) : "");
+			List<String> aliasList = getAliases(command);
+			
+			for(String alias : aliasList) {
+				String newCommand = ("/" + alias + withoutBeginning);
+				allowedCommandList.add(newCommand);
+			}
+		}
+		ALLOWED_COMMANDS_LIST.addAll(allowedCommandList);
 	}
 
 	private static List<String> getAliases(String command) {

@@ -1,0 +1,6 @@
+residence options:
+  no entry:
+    mode: KNOCKBACK
+    knockback strength: 1.5
+    message cooldown: 5
+  

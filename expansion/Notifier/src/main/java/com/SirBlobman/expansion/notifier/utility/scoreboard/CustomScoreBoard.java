@@ -11,7 +11,6 @@ import com.SirBlobman.combatlogx.utility.Util;
 import com.SirBlobman.expansion.notifier.Notifier;
 import com.SirBlobman.expansion.notifier.config.ConfigNotifier;
 import com.SirBlobman.expansion.notifier.hook.PlaceholderHandler;
-import com.SirBlobman.expansion.placeholders.hook.IPlaceholderHandler;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
@@ -95,15 +94,27 @@ public class CustomScoreBoard {
         if(valueLength > maxLength) {
             String part1 = value.substring(0, maxLength);
             String part2 = value.substring(maxLength);
+
             String colorCodes = ChatColor.getLastColors(part1);
             part2 = colorCodes + part2;
+
+            if(part1.endsWith("\u00A7")) {
+                part1 = part1.substring(0, part1.length() - 1);
+                part2 = "\u00A7" + part2;
+            }
+
             if(part2.length() > maxLength) {
                 part2 = part2.substring(0, maxLength);
             }
 
-            custom.getTeam().setPrefix(part1);
-            custom.getTeam().setSuffix(part2);
-        } else custom.getTeam().setPrefix(value);
+            Team team = custom.getTeam();
+            team.setPrefix(part1);
+            team.setSuffix(part2);
+            return;
+        }
+
+        Team team = custom.getTeam();
+        team.setPrefix(value);
     }
 
     private void removeLine(int line) {
@@ -148,8 +159,7 @@ public class CustomScoreBoard {
     private int getMaxLineLength() {
         int minorVersion = NMS_Handler.getMinorVersion();
         if(minorVersion <= 12) return 16;
-        if(minorVersion <= 13) return 64;
 
-        return 16;
+        return 64;
     }
 }

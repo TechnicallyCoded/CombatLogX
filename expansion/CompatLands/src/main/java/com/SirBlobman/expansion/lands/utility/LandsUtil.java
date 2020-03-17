@@ -22,7 +22,10 @@ public class LandsUtil extends Util {
     }
     
     public static boolean isSafeZone(Player player, Location location) {
-        LandChunk landChunk = ADDON.getLandChunk(location);
+        LandsIntegration api = getAddon();
+        if(api == null) return false;
+
+        LandChunk landChunk = api.getLandChunk(location);
         if(landChunk == null) return false;
 
         return !landChunk.canAction(player, RoleSetting.ATTACK_PLAYER, true);
@@ -30,7 +33,6 @@ public class LandsUtil extends Util {
     
     public static void onDisable() {
         if(ADDON == null || KEY == null) return;
-
         ADDON.disable(KEY);
     }
 }

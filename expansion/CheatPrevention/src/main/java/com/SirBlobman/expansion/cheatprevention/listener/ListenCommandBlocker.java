@@ -22,73 +22,44 @@ public class ListenCommandBlocker implements Listener {
     @EventHandler(priority=EventPriority.LOWEST, ignoreCancelled=true)
     public void onCommand(PlayerCommandPreprocessEvent e) {
         Player player = e.getPlayer();
-        debug("Detected PlayerCommandPreProcessEvent for player '" + player.getName() + "'.");
-
+        String playerName = player.getName();
+        String command = e.getMessage();
+        debug("Detected PlayerCommandPreProcessEvent for player '" + playerName + "' and command '" + command + "'.");
+        
         if(!CombatUtil.isInCombat(player)) {
             debug("Player is not in combat, ignoring event.");
             return;
         }
         
-        String command = e.getMessage();
-        debug("Event Command: " + command);
-
-        String actualCommand = convertCommand(command);
-        debug("Converted Command: " + actualCommand);
-
-        if(!isBlocked(actualCommand)) {
-            debug("The command is not blocked by config, ignoring event.");
+        if(startsWithAny(command, ConfigCheatPrevention.ALLOWED_COMMANDS_LIST)) {
+            debug("Allowed Command List: " + ConfigCheatPrevention.ALLOWED_COMMANDS_LIST);
+            debug("The allowed command list contains the command, ignoring event.");
+            return;
+        }
+        
+        if(!startsWithAny(command, ConfigCheatPrevention.BLOCKED_COMMANDS_LIST)) {
+            debug("Blocked Command List: " + ConfigCheatPrevention.BLOCKED_COMMANDS_LIST);
+            debug("The blocked command list does not contain the command, ignoring event.");
             return;
         }
         
         e.setCancelled(true);
-
-        String format = ConfigLang.getWithPrefix("messages.expansions.cheat prevention.command.not allowed");
-        String message = format.replace("{command}", actualCommand);
-
+        String message = ConfigLang.getWithPrefix("messages.expansions.cheat prevention.command.not allowed").replace("{command}", command);
         Util.sendMessage(player, message);
-        debug("Cancelled command event and sent message to player.");
-    }
-
-    @EventHandler(priority=EventPriority.HIGHEST, ignoreCancelled=true)
-    public void onCommandHighest(PlayerCommandPreprocessEvent e) {
-        onCommand(e);
     }
     
-    private String convertCommand(String original) {
-        if(original == null || original.isEmpty()) original = "";
-        if(!original.startsWith("/")) original = "/" + original;
+    private boolean startsWithAny(String string, List<String> valueList) {
+        if(string == null || string.isEmpty() || valueList == null || valueList.isEmpty()) return false;
+        if(valueList.contains("*") || valueList.contains("/*")) return true;
         
-        return original;
-    }
-    
-    private boolean isBlocked(String command) {
-    	List<String> commandList = ConfigCheatPrevention.BLOCKED_COMMANDS_LIST;
-    	boolean contains = listContainsOrStartsWith(commandList, command);
-    	
-    	return (ConfigCheatPrevention.BLOCKED_COMMANDS_IS_WHITELIST != contains);
-    }
-    
-    private boolean listContainsOrStartsWith(List<String> list, String query) {
-    	if(containsIgnoreCase(list, query)) return true;
-    	if(anyStartsWithIgnoreCase(list, query)) return true;
-    	
-    	debug("Could not find '" + query + "' in command list.");
-    	return false;
-    }
-
-    private boolean containsIgnoreCase(List<String> list, String value) {
-        for(String string : list) {
-            if(string.equalsIgnoreCase(value)) return true;
+        String lowerString = string.toLowerCase();
+        for(String value : valueList) {
+            String lowerValue = value.toLowerCase();
+            if(!lowerString.startsWith(lowerValue)) continue;
+            
+            return true;
         }
-        return false;
-    }
-
-    private boolean anyStartsWithIgnoreCase(List<String> list, String value) {
-        String lowerValue = value.toLowerCase();
-        for(String string : list) {
-            String lowerString = string.toLowerCase();
-            if(lowerString.startsWith(lowerValue)) return true;
-        }
+        
         return false;
     }
 }
