@@ -34,7 +34,7 @@ public class CommandCombatTime implements TabExecutor {
 	private boolean checkOther(CommandSender sender, String[] args) {
 		String targetName = args[0];
 		Player target = Bukkit.getPlayer(targetName);
-		if(targetName == null) {
+		if(target == null) {
 			String message = ConfigLang.getWithPrefix("messages.commands.invalid target").replace("{target}", targetName);
 			Util.sendMessage(sender, message);
 			return true;
