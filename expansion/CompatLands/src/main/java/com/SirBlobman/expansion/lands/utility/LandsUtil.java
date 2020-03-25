@@ -7,7 +7,8 @@ import org.bukkit.Location;
 import org.bukkit.entity.Player;
 
 import me.angeschossen.lands.api.integration.LandsIntegration;
-import me.angeschossen.lands.api.land.LandChunk;
+import me.angeschossen.lands.api.land.Land;
+import me.angeschossen.lands.api.land.LandArea;
 import me.angeschossen.lands.api.role.enums.RoleSetting;
 
 public class LandsUtil extends Util {
@@ -24,11 +25,14 @@ public class LandsUtil extends Util {
     public static boolean isSafeZone(Player player, Location location) {
         LandsIntegration api = getAddon();
         if(api == null) return false;
-
-        LandChunk landChunk = api.getLandChunk(location);
-        if(landChunk == null) return false;
-
-        return !landChunk.canAction(player, RoleSetting.ATTACK_PLAYER, true);
+    
+        LandArea landArea = api.getArea(location);
+        boolean isAreaSafeZone = (landArea != null && !landArea.canSetting(player, RoleSetting.ATTACK_PLAYER, false));
+        
+        Land land = api.getLand(location);
+        boolean isLandSafeZone = (land != null && !land.canSetting(player, RoleSetting.ATTACK_PLAYER, false));
+        
+        return (isAreaSafeZone || isLandSafeZone);
     }
     
     public static void onDisable() {

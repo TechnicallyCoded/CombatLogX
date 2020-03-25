@@ -7,6 +7,7 @@ import com.SirBlobman.combatlogx.expansion.NoEntryExpansion;
 import com.SirBlobman.combatlogx.utility.PluginUtil;
 import com.SirBlobman.expansion.lands.config.ConfigLands;
 import com.SirBlobman.expansion.lands.listener.ListenLands;
+import com.SirBlobman.expansion.lands.utility.LandsUtil;
 
 public class CompatLands extends NoEntryExpansion {
 	public static File FOLDER;
@@ -41,7 +42,14 @@ public class CompatLands extends NoEntryExpansion {
 		ListenLands listener = new ListenLands(this);
 		PluginUtil.regEvents(listener);
 	}
-
+	
+	@Override
+	public void disable() {
+		super.disable();
+		
+		LandsUtil.onDisable();
+	}
+	
 	@Override
 	public void onConfigReload() {
 		ConfigLands.load();
