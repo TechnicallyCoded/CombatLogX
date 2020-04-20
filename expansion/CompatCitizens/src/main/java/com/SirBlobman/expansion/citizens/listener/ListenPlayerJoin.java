@@ -3,6 +3,7 @@ package com.SirBlobman.expansion.citizens.listener;
 import java.util.List;
 import java.util.UUID;
 
+import com.SirBlobman.api.nms.NMS_Handler;
 import com.SirBlobman.api.utility.ItemUtil;
 import com.SirBlobman.combatlogx.config.ConfigLang;
 import com.SirBlobman.combatlogx.event.PlayerTagEvent;
@@ -143,8 +144,12 @@ public class ListenPlayerJoin implements Listener {
     }
 
     private void fixHealth(Player player) {
+        NMS_Handler handler = NMS_Handler.getHandler();
+        double maxHealth = handler.getMaxHealth(player);
+    
         double lastHealth = ConfigData.get(player, "last health", player.getHealth());
-        player.setHealth(lastHealth);
+        double actualHealth = Math.min(lastHealth, maxHealth);
+        player.setHealth(actualHealth);
 
         Util.debug("[Citizens Compatibility] Set player health to '" + lastHealth + "'.");
     }

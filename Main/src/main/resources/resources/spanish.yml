@@ -1,0 +1,173 @@
+# Default messages for CombatLogX
+# DO NOT set a message to `false` or null
+# DO NOT delete any messages
+# 
+# To remove a message, set it to "" or ''
+messages:
+  plugin prefix: "&1[&dServidor&1]&r"
+  expansion prefix: "&1[&dServidor&1]&r"
+
+  loading expansion: "Cargando la expansión '{name} v{version}'"
+  loaded expansions: "{amount} Expansión(es) cargada{s}"
+
+  enabling expansion: "Habilitando expansión '{name} v{version}'"
+  enabled expansions: "Se han habilitado correctamente {amount} expansiones{s}"
+  
+  unknown entity name: "Entidad desconocida"
+
+  broadcasts:
+    on load: "§cCombatLogX está precargando expansiones, todavía se está procesando, ¡reporta cualquier error!"
+    on enable: "&2CombatLogX está ahora activado."
+    on disable: "&4CombatLogX está ahora desactivado."
+
+  commands:
+    no permission: "&c&oNo tienes el permiso &c'&a{permission}&c'&c&o."
+    invalid target: "&c&oJugador inválido &c'&a{target}&c'&c&o."
+
+    combatlogx:
+      reloaded: "&a&oSe ha recargado toda la configuración correctamente."
+      tag: "&a&oAcabas de forzar a &f{target}&a&o en un combate. ¡Esto puede provocar problemas!"
+      untag: "&a&oAcabas de forzar a &f{target}&a&o a estar fuera del combate. ¡Esto puede provocar problemas!"
+      not in combat: "&c&oEste jugador no está en combate."
+      help:
+      - "&f"
+      - "&6&lAyuda de comandos del plugin CombatLogX:"
+      - "  &f&l/combatlogx help&7: Ver la página de ayuda."
+      - "  &f&l/combatlogx version&7: Revisar la versión de CombatLogX."
+      - "  &f&l/combatlogx tag <player>&7: Forzar poner un jugador en combate (puede causar errores.)"
+      - "  &f&l/combatlogx untag <player>&7: Forzar poner un jugador fuera de combate (esto puede causar errores.)"
+      - "  &f&l/combatlogx toggle&7: (Requiere expansión Notifier) Activa o desactiva la barra del jefe, barra de acción, y la barra de récords."
+      - "&f"
+
+    combattime:
+      not in combat: "&c&oNo estás en combate."
+      not in combat other: "&c&o{target} no está en combate."
+      time left: "&a&oTe quedan &c{time} segundos &a&orestantes."
+      time left other: "&f{target}&a&o tiene &c{time} segundos &a&orestantes"
+
+  combat:
+    expire: "&a&oYa no estás en combate."
+    enemy death: "&a&oTu enemigo ha muerto."
+    tagged:
+      attacked by player: "&c&oHas sido atacado por &2{name}&c&o. ¡No te desconectes!"
+      attacker of player: "&c&oHas atacado a &2{name}&c&o. ¡No te desconectes!"
+      attacked by mob: "&c&oHas sido atacado por un/una &f{mob_type}&c&o. ¡No te desconectes!"
+      attacker of mob: "&c&oHas atacado a un/una &f{mob_type}&c&o. ¡No te desconectes!"
+      unknown: "&c&oAhora estás en combate. ¡No te desconectes!"
+
+  expansions:
+    cheat prevention:
+      gamemode:
+        change: "&c&oTu modo de juego fue cambiado a &f{gamemode}&c&o porque has entrado en combate."
+        not allowed: "&c&oNo puedes cambiar entre distintos modos de juego durante un combate."
+
+      flight:
+        disabled: "&c&oTu modo vuelo fue desactivado porque has entrado en combate."
+        not allowed: "&c&oNo puedes activar el modo vuelo durante un combate."
+
+      elytra:
+        disabled: "&c&oTu Elytra fue desactivada porque has entrado en combate."
+        not allowed: "&c&oNo puedes usar Elytra durante un combate."
+        
+      riptide not allowed: "&c&oNo puedes usar el tridente durante un combate."
+
+      command:
+        not allowed: "&c&oNo puedes ejecutar el comando &b{command} &c&odurante un combate."
+
+      teleport:
+        enderpearl:
+          not allowed: "&c&oNo puedes usar perlas del fin durante un combate."
+        other:
+          not allowed: "&c&oNo puedes teletransportarte durante un combate."
+
+      inventory:
+        closed: "&c&oTu inventario ha sido cerrado porque has entrado en combate."
+        not allowed: "&c&oNo puedes abrir inventarios durante un combate."
+
+      chat:
+        not allowed: "&c&oNo puedes enviar mensajes por el chat durante un combate."
+        
+      blocks:
+        breaking not allowed: "&c&oNo puedes romper bloques durante un combate."
+        placing not allowed: "&c&oNo puedes poner bloques durante un combate."
+        interaction not allowed: "&c&oNo puedes hacer clic derecho en eso durante un combate."
+        
+      items:
+        pick up not allowed: "&c&oNo puedes recoger objetos del suelo durante un combate."
+        dropping not allowed: "&c&oNo puedes tirar objetos al suelo durante un combate."
+        
+      entities:
+        interaction not allowed: "&c&oNo puedes interactuar con eso durante un combate."
+
+
+    notcombatlogx:
+      all damage: "&c&oTe has hecho daño. ¡No te desconectes!"
+      damage tag:
+        contact: "&c&oEl cactus te ha hecho daño. ¡No te desconectes!"
+        suffocation: "&c&oTe estás ahogando en una pared. ¡No te desconectes!"
+        fall: "&c&oTe has caído. ¡No te desconectes!"
+        fire: "&c&oHas andado por fuego. ¡No te desconectes!"
+        fire tick: "&c&oTe estás quemando. ¡No te desconectes!"
+        lava: "&c&oEstás ardiendo en lava. ¡No te desconectes!"
+        drowning: "&c&oTe estás ahogando. ¡No te desconectes!"
+        block explosion: "&c&oTe ha explotado una TNT. ¡No te desconectes!"
+        lightning: "&c&o¡Zeus te odia!. ¡No te desconectes!"
+        starvation: "&c&oTe estás muriendo de hambre. ¡No te desconectes!"
+        poison: "&c&oHas sido envenenado. ¡No te desconectes!"
+        magic: "&c&oAlguien te ha tirado una poción. ¡No te desconectes!"
+        wither: "&c&oEstás con un Wither. ¡No te desconectes!"
+        falling block: "&c&oUn bloque ha caído en ti. ¡No te desconectes!"
+        custom: "&c&oHas recibido daño desde una fuente desconocida. ¡No te desconectes!"
+        fly into wall: "&c&oHas golpeado a una pared. ¡No te desconectes!"
+        hot floor: "&c&o¡El suelo es lava! ¡No te desconectes!"
+        cramming: "&c&oEstás siendo aplastado. ¡No te desconectes!"
+
+    factions compatibility:
+      no entry: "No puedes entrar en un área No-PvP durante un combate."
+
+    towny compatibility:
+      no entry: "No puedes entrar en un área No-PvP durante un combate."
+      
+    residence compatibility:
+      no entry: "No puedes entrar en un área No-PvP durante un combate."
+      
+    lands compatibility:
+      no entry: "No puedes entrar en un área No-PvP durante un combate."
+      
+    red protect compatibility:
+      no entry: "No puedes entrar en un área No-PvP durante un combate."
+
+    worldguard compatibility:
+      no entry:
+        pvp: "No puedes entrar en un área No-PvP durante un combate."
+        mob: "No puedes entrar en un área donde no hay monstruos durante un combate."
+
+    placeholder compatibility:
+      zero time left: "No en combate"
+      unknown: "Desconocido"
+      status:
+        fighting: "&cPeleando"
+        idling: "&aIdling"
+        in combat: "&aSí"
+        not in combat: "&cNo"
+      newbie helper:
+        in protection: "&aProtegido"
+        not in protection: "&cNo protegido"
+        
+    citizens compatibility:
+      kick message: "&cNo puedes iniciar sesión hasta que tu jugador haya muerto o haya sido eliminado."
+      
+    newbie helper:
+      pvp:
+        enabled: "&7&lPVP: &aActivado"
+        disabled: "&7&lPVP: &cDesactivado"
+      no pvp:
+        self: "&c&oNo puedes golpear a ese jugador mientras tu PvP está desactivado."
+        other: "&c&oEste jugador tiene el PvP desactivado."
+      disabled:
+        attacker: "Has atacado a alguien, por lo que tu protección de novato ha sido desactivada."
+        expired: "Tu protección de novato ha acabado."
+      check:
+        format: "&2{target} ha {setting} su PvP."
+        setting enabled: "&aACTIVADO"
+        setting disabled: "&cDESACTIVADO"
