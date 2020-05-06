@@ -18,8 +18,8 @@ public class WGUtil extends Util {
     public static void onLoad() {
         String version = Util.PM.getPlugin("WorldGuard").getDescription().getVersion();
 
-        if(version.startsWith("6.1")) WORLDGUARD_VERSION = "6.1";
-        else if(version.startsWith("6.2")) WORLDGUARD_VERSION = "6.2";
+        if(version.startsWith("6.2") || version.startsWith("6.1.3-SNAPSHOT")) WORLDGUARD_VERSION = "6.2";
+        else if(version.startsWith("6.1")) WORLDGUARD_VERSION = "6.1";
         else if(version.startsWith("7.0")) WORLDGUARD_VERSION = "7.0";
         registerFlag();
     }
