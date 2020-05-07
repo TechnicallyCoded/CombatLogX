@@ -1,0 +1,170 @@
+# French Translation by FisaDev#7436 on Discord
+# This translation is not verified, if you believe there is an error please report it as an issue on GitHub
+#
+# Traduction française par FisaDev#7436 sur Discord
+# Cette traduction n'est pas vérifiée, si vous pensez qu'il y a une erreur, veuillez la signaler comme un problème sur GitHub
+messages:
+  plugin prefix: "&6&l[&fUplaCombat&6&l]&r"
+  expansion prefix: "&6&l[&fUplaCombat &7- &b{expansion}&6&l]&r"
+
+  loading expansion: "Chargement de l'expansion '{name} v{version}'"
+  loaded expansions: "{amount} expansion{s} chargée{s}"
+
+  enabling expansion: "Expansion '{name} v{version}'en cours d'activation"
+  enabled expansions: "expansion{s} {amount} chargée{s} avec succès"
+
+  unknown entity name: "entitée inconnue"
+
+  broadcasts:
+    on load: "&cUplaCombat is preloading expansions this is W.I.P, report any issues!"
+    on enable: "&cUplaCombat is now enabled."
+    on disable: "&cUplaCombat is not disabled."
+
+  commands:
+    no permission: "&c&oVous n'avez pas la permission &c'&a{permission}&c'&c&o."
+    invalid target: "&c&oCible invalide &c'&a{target}&c'&c&o."
+
+    combatlogx:
+      reloaded: "&a&oVous avez bien rechargé les configurations."
+      tag: "&a&oVous avez mis &f{target}&a&o en combat. Cela peut engendrer des problèmes!"
+      untag: "&a&oVous avez forcé &f{target}&a&o à la sortie du mode combat. Cela peut engendrer des problèmes!"
+      not in combat: "&c&oCe joueur n'est pas en combat."
+      help:
+      - "&f"
+      - "&6&lCombatLogX Command Help:"
+      - "  &f&l/combatlogx help&7: Voir cette page d'aide."
+      - "  &f&l/combatlogx version&7: Vérification de votre version d'UplaCombat."
+      - "  &f&l/combatlogx tag <player>&7: Mettez un joueur en combat (peut provoquer des erreurs.)"
+      - "  &f&l/combatlogx untag <player>&7: Mettez un joueur hors de combat (peut provoquer des erreurs.)"
+      - "  &f&l/combatlogx toggle&7: (Requires Notifier expansion) Activer ou désactiver les boss bar, action bar, et score board."
+      - "&f"
+
+    combattime:
+      not in combat: "&c&oVous êtes en combat."
+      not in combat other: "&c&o{target} n'est pas en combat."
+      time left: "&a&oIl vous reste &c{time} seconds &a&oavant de sortir du mod combat."
+      time left other: "&f{target}&a&o est en combat pour encore &c{time} seconds"
+
+  combat:
+    expire: "&a&oVous n'êtes plus en combat."
+    enemy death: "&a&oVotre ennemi est mort."
+    tagged:
+      attacked by player: "&c&oVous êtes attaqué par &f{name}&c&o. Ne vous déconnectez pas!"
+      attacker of player: "&c&oVous attaquez &f{name}&c&o. Ne vous déconnectez pas!"
+      attacked by mob: "&c&oVous avez été attaqué par a(n) &f{mob_type}&c&o. Ne vous déconnectez pas!"
+      attacker of mob: "&c&oVous avez attaqué a(n) &f{mob_type}&c&o. Ne vous déconnectez pas!"
+      unknown: "&c&oVous êtes maintenant en combat. Ne vous déconnectez pas!"
+
+  expansions:
+    cheat prevention:
+      gamemode:
+        change: "&c&oVotre mode de jeux à été changé en &f{gamemode}&c&o car vous avez été ciblé."
+        not allowed: "&c&oVous ne pouvez pas changer de mode de jeux pendant que vous êtes en combat."
+
+      flight:
+        disabled: "&c&oVotre fly à été désactivé car vous êtes ciblé."
+        not allowed: "&c&oVous ne pouvez pas activer votre fly pendant que vous êtes en combat."
+
+      elytra:
+        disabled: "&c&oVos élytra ont été désactivées car vous êtes ciblé."
+        not allowed: "&c&oVous ne pouvez pas utiliser vos élytra pendant que vous êtes en combat."
+
+      riptide not allowed: "&c&oYou cannot use riptide during combat."
+
+      command:
+        not allowed: "&c&oVous ne pouvez pas executer la commande &a{command} &c&oquand vous êtes en combat."
+
+      teleport:
+        enderpearl:
+          not allowed: "&c&oVous ne pouvez pas utiliser d'enderpearl pendant que vous êtes en combat"
+        other:
+          not allowed: "&c&oVous ne pouvez pas vous téléporter pendant que vous êtes en combat."
+
+      inventory:
+        closed: "&c&oVotre inventaire a été fermé car vous êtes ciblé."
+        not allowed: "&c&oVous ne pouvez pas ouvrir votre inventaire quand vous êtes en combat."
+
+      chat:
+        not allowed: "&c&oVous ne pouvez pas envoyer de message dns le chat quand vous êtes en combat.."
+
+      blocks:
+        breaking not allowed: "&c&oVous ne pouvez pas casser de bloc quand vous êtes en combat."
+        placing not allowed: "&c&oVous ne pouvez pas placer de bloc quand vous êtes en combat."
+        interaction not allowed: "&c&oVous ne pouvez pas faire de clique droit ici quand vous êtes en combat."
+
+      items:
+        pick up not allowed: "&c&oVous ne pouvez pas ramasser d'objet quand vous êtes en combat."
+        dropping not allowed: "&c&oVous ne pouvez pas déposer d'objet quand vous êtes en combat."
+
+      entities:
+        interaction not allowed: "&c&oVous ne pouvez pas interagir quand vous êtes en combat."
+
+
+    notcombatlogx:
+      all damage: "&c&oVous prennez des dégats. Ne vous déconnectez pas!"
+      damage tag:
+        contact: "&c&oVous avez été piqué par un cactus. Ne vous déconnectez pas!"
+        suffocation: "&c&oVous suffoquez dans un mur. Ne vous déconnectez pas!"
+        fall: "&c&oVous êtes tombé. Ne vous déconnectez pas!"
+        fire: "&c&oVous avez marché sur du feu. Ne vous déconnectez pas!"
+        fire tick: "&c&oVous brulez. Ne vous déconnectez pas!"
+        lava: "&c&oVous bouillonnez dans la lave. Ne vous déconnectez pas!"
+        drowning: "&c&oVous vous noyez. Ne vous déconnectez pas!"
+        block explosion: "&c&oVous avez été explosé par de la tnt. Ne vous déconnectez pas!"
+        lightning: "&c&oZeus vous déteste. Ne vous déconnectez pas!"
+        starvation: "&c&oVous mourrez de faim. Ne vous déconnectez pas!"
+        poison: "&c&oVous avez été empoisonné. Ne vous déconnectez pas!"
+        magic: "&c&oQuelqu'un vos a jetté une potion. Ne vous déconnectez pas!"
+        wither: "&c&oVous dépérissez. Ne vous déconnectez pas!"
+        falling block: "&c&oUn bloc vous est tombé dessus. Ne vous déconnectez pas!"
+        custom: "&c&oVous avez pris des dommages d'une source inconnue. Ne vous déconnectez pas!"
+        fly into wall: "&c&oVous heurtez un mur. Ne vous déconnectez pas!"
+        hot floor: "&c&oLe sol c'est de la lave! Ne vous déconnectez pas!"
+        cramming: "&c&oVous avez été écrasé. Ne vous déconnectez pas!"
+
+    factions compatibility:
+      no entry: "Vous ne pouvez pas rentrer dans une zone non-pvp pendant que vous êtes en combat."
+
+    towny compatibility:
+      no entry: "Vous ne pouvez pas rentrer dans une zone non-pvp pendant que vous êtes en combat."
+
+    residence compatibility:
+      no entry: "Vous ne pouvez pas rentrer dans une zone non-pvp pendant que vous êtes en combat."
+
+    lands compatibility:
+      no entry: "Vous ne pouvez pas rentrer dans une zone non-pvp pendant que vous êtes en combat."
+
+    red protect compatibility:
+      no entry: "Vous ne pouvez pas rentrer dans une zone non-pvp pendant que vous êtes en combat."
+
+    worldguard compatibility:
+      no entry:
+        pvp: "Vous ne pouvez pas rentrer dans une zone non-pvp pendant que vous êtes en combat."
+        mob: "Vous ne pouvez pas rentrer dans une zone sans mob pendant que vous êtes en combat."
+
+    placeholder compatibility:
+      zero time left: "Pas en combat"
+      unknown: "Inconnue"
+      status:
+        fighting: "&cSe bat"
+        idling: "&aRalenti"
+        in combat: "&aOui"
+        not in combat: "&cNon"
+      newbie helper:
+        in protection: "&aProtegé"
+        not in protection: "&cNon protégé"
+
+    newbie helper:
+      pvp:
+        enabled: "&7&lPVP: &aActivé"
+        disabled: "&7&lPVP: &cDésactivé"
+      no pvp:
+        self: "&c&oVous ne pouvez pas frapper un joueur quand votre mode pvp n'est pas actif."
+        other: "&c&oNe joueur n'a pas le pvp d'activé."
+      disabled:
+        attacker: "Vous avez attaqué quelqu'un et votre protection pour débutant a été désactivée."
+        expired: "Votre protection pour débutant vient d'expirer."
+      check:
+        format: "&a{target} pvp-mod mit à {setting}"
+        setting enabled: "&aON"
+        setting disabled: "&cOFF"
