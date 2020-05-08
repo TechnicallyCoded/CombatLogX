@@ -7,6 +7,7 @@ import com.SirBlobman.combatlogx.utility.Util;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Objects;
 
 import com.sk89q.worldguard.bukkit.WorldGuardPlugin;
@@ -37,6 +38,7 @@ public class v6_1_WGUtil {
             
             Class<DefaultFlag> class_DefaultFlag = DefaultFlag.class;
             Field field_flagsList = class_DefaultFlag.getDeclaredField("flagsList");
+            
             Object flagsList = field_flagsList.get(null);
             int currentFlagLength = Array.getLength(flagsList);
         
@@ -46,7 +48,13 @@ public class v6_1_WGUtil {
             
             System.arraycopy(flagsList, 0, newFlagsList, 0, currentFlagLength);
             Array.set(newFlagsList, currentFlagLength, flag);
-        
+            
+            Class<Field> class_Field = Field.class;
+            Field field_modifiers = class_Field.getDeclaredField("modifiers");
+            field_modifiers.setAccessible(true);
+            
+            field_modifiers.setInt(field_flagsList, field_flagsList.getModifiers() & ~Modifier.FINAL);
+            field_flagsList.setAccessible(true);
             field_flagsList.set(null, newFlagsList);
         } catch(Exception ex) {
             Util.print("&cAn error has been detected, the flag no-tag won't work properly!");
