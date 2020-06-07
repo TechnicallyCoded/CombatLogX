@@ -38,14 +38,14 @@ public class ConfigFactions extends Config {
     public static byte FORCEFIELD_MATERIAL_DATA;
     public static String FORCEFIELD_BYPASS_PERMISSION;
 
-    public static YamlConfiguration load() {
+    public static void load() {
         if (FOLDER == null) FOLDER = CompatFactions.FOLDER;
         if (FILE == null) FILE = new File(FOLDER, "factions.yml");
 
         if (!FILE.exists()) copyFromJar("factions.yml", FOLDER);
         config = load(FILE);
         defaults();
-        return config;
+        updateMaterials();
     }
 
     private static void defaults() {

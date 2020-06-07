@@ -14,7 +14,7 @@ public class CompatFactions extends NoEntryExpansion {
     private static FactionsUtil FUTIL;
 
     public String getVersion() {
-        return "14.5";
+        return "14.6";
     }
 
     public String getUnlocalizedName() {
