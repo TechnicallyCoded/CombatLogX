@@ -211,7 +211,7 @@ public class CommandCombatLogX implements TabExecutor {
         }
 
         Player player = (Player) sender;
-        String toggleType = args[1].toLowerCase();
+        String toggleType = args[0].toLowerCase();
         switch(toggleType) {
             case "score":
             case "scoreboard":
