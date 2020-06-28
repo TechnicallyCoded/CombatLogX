@@ -6,6 +6,7 @@ import com.SirBlobman.combatlogx.config.ConfigLang;
 import com.SirBlobman.combatlogx.config.ConfigOptions;
 import com.SirBlobman.combatlogx.event.PlayerTagEvent;
 import com.SirBlobman.combatlogx.event.PlayerUntagEvent;
+import com.SirBlobman.combatlogx.event.PlayerUntagEvent.UntagReason;
 import com.SirBlobman.combatlogx.expansion.CLXExpansion;
 import com.SirBlobman.combatlogx.expansion.Expansions;
 import com.SirBlobman.combatlogx.utility.CombatUtil;
@@ -20,6 +21,7 @@ import org.bukkit.entity.Player;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class CommandCombatLogX implements TabExecutor {
@@ -107,10 +109,13 @@ public class CommandCombatLogX implements TabExecutor {
 
     private boolean reloadConfigCommand(CommandSender sender) {
         if(checkNoPermission(sender, "combatlogx.command.combatlogx.reload")) return true;
-
+    
+        Collection<? extends Player> onlinePlayerList = Bukkit.getOnlinePlayers();
+        onlinePlayerList.forEach(player -> CombatUtil.untag(player, UntagReason.EXPIRE));
+    
         ConfigOptions.load();
         ConfigLang.load();
-        Expansions.reloadConfigs();;
+        Expansions.reloadConfigs();
 
         String message = ConfigLang.getWithPrefix("messages.commands.combatlogx.reloaded");
         Util.sendMessage(sender, message);
