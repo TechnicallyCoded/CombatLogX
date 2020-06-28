@@ -21,9 +21,9 @@ More information about expansions can be found here: [CombatLogX Wiki](https://w
 The API for this version is not on the global repository. You have to manually install it.  
 You can run the following commands as long as you have `Git` and `Maven` installed correctly.  
 ```cmd
-git clone "https://github.com/SirBlobman/SirBlobmanAPI.git" "./SirBlobmanAPI"
+git clone "https://github.com/SirBlobman/SirBlobmanAPI.git" "./SirBlobmanAPI-1.10" --branch "old/1.10-SNAPSHOT"
 git clone "https://github.com/SirBlobman/CombatLogX.git" "./CombatLogX-9" --branch "old/9.0.0.0"
-cd "SirBlobmanAPI"
+cd "SirBlobmanAPI-1.10"
 mvn clean install
 cd "../CombatLogX-9"
 mvn clean install -N
